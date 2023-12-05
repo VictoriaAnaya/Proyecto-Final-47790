@@ -6,6 +6,7 @@ from .views import inicio_view, usuarios_view, foros_view, noticias_view, about_
 app_name = 'AppCoder'
 
 urlpatterns = [
+    path('', inicio_view, name='inicio'),
     path("inicio/", inicio_view, name="inicio"),
     path("usuarios/", usuarios_view, name="usuarios"), 
     path('foros/', foros_view, name='foros'),

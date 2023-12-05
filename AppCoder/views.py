@@ -1,10 +1,10 @@
 from django.shortcuts import render
 
 def inicio_view(request):
-    return render(request, 'AppCoder/inicio.html')
+    return render(request, 'AppCoder/index.html')
 
 def usuarios_view(request):
-    return render(request, 'AppCoder/base.html')
+    return render(request, 'AppCoder/usuarios.html')
 
 def about_view(request):
     return render(request, 'AppCoder/about.html')
