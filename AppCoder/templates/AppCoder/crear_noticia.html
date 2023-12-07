@@ -1,0 +1,18 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido_titulo %}
+<h1>Crear Noticia</h1>
+{% endblock contenido_titulo %}
+
+{% block contenido %}
+<ul>
+    <li><a href="{% url 'AppCoder:noticias' %}">Volver al noticias</a></li>
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Crear</button>
+</form>
+
+{% endblock contenido %}

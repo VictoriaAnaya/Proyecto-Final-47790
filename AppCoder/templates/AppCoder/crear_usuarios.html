@@ -1,0 +1,16 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido_titulo %}
+<H1>Crear Usuario</H1>
+{% endblock contenido_titulo %}
+
+{% block contenido %}
+
+<form method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type= "submitt">Registrar</button>
+</form>
+
+
+{% endblock contenido %}

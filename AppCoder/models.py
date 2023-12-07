@@ -6,7 +6,14 @@ class Pais(models.Model):
     def __str__(self):
         return self.nombre
 
+class ID_Usuario(models.Model):
+    nombre = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.nombre
+
 class Usuario(models.Model):
+    ID = models.ForeignKey(ID_Usuario, on_delete=models.SET_NULL, null=True, blank=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     nacimiento = models.DateField(null=True, blank=True)
