@@ -1,2 +1,61 @@
 # TerceraEntrega---47790
 Tercera entrega del curso de CoderHouse, comisión 47790, realizada por la alumna Gómez Anaya Victoria.
+
+PROYECTO.
+Este proyecto es desarrollado en Python utilizando el framework Django. El proyecto trata de una app web sobre un foro de noticias, la cual renderiza la información que esta almacenada en la base de datos y la muestra en las diferentes vistas dependiendo cual sea la solicitud. Debajo se encuentra el link para ver la app en funcionamiento
+________________________________________
+
+DOCUMENTACIÓN.
+Para poder encontrar los archivos que nombrare a posterior ingresar en la carpeta AppCoder. Los archivos son: models.py, forms.py, urls.py, views.py, la carpeta de templates, entre otros.
+________________________________________
+
+MODELS.PY
+En este archivo podemos encontrar los modelos de datos usados por el backend.
+
+Usuario:
+El modelo Usuario representa a los usuarios registrados en tu aplicación. Contiene información sobre personas que utilizan la plataforma, incluyendo detalles como nombre, apellido, fecha de nacimiento, intereses y país de origen. Los campos típicos de este modelo incluirían:
+	nombre (CharField): Almacena el nombre del usuario.
+	apellido (CharField): Guarda el apellido del usuario.
+	nacimiento (DateField o DateTimeField): Registra la fecha de nacimiento del usuario.
+	intereses (TextField o algún otro tipo de campo de texto): Almacena los intereses del usuario, como una descripción más extensa.
+	pais_origen (ForeignKey a un modelo Pais): Relaciona al usuario con su país de origen.
+
+Pais:
+El modelo Pais representa países que pueden asociarse con los usuarios. Este modelo podría tener los siguientes campos:
+	nombre (CharField): Almacena el nombre del país.
+
+Noticia:
+El modelo Noticia representa las noticias publicadas en tu plataforma. Contiene información sobre los artículos o noticias, incluyendo título, contenido y fecha de publicación. Los campos típicos de este modelo podrían ser:
+	titulo (CharField): Almacena el título de la noticia.
+	contenido (TextField o algún otro tipo de campo de texto): Guarda el contenido de la noticia.
+	fecha_publicacion (DateField o DateTimeField): Registra la fecha en que se publicó la noticia.
+
+Comentario:
+El modelo Comentario permite asociar comentarios a usuarios y noticias, almacenar el contenido del comentario y registrar la fecha y hora de creación del comentario. Es una forma eficaz de organizar y gestionar comentarios en tu aplicación.
+    usuario (ForeignKey a Usuario): Este campo establece una relación muchos a uno con el modelo Usuario. Cada comentario está asociado a un usuario específico. Si un usuario se elimina, todos los comentarios asociados a ese usuario se eliminan también debido a on_delete=models.CASCADE.
+
+    noticia (ForeignKey a Noticia): Similar al campo usuario, este campo establece una relación muchos a uno con el modelo Noticia. Cada comentario está asociado a una noticia específica. Si una noticia se elimina, todos los comentarios asociados a esa noticia se eliminan también debido a on_delete=models.CASCADE.
+
+    contenido (TextField): Este campo almacena el contenido del comentario como texto. Puede contener una descripción detallada o cualquier otro tipo de información que el usuario haya ingresado.
+
+    fecha_comentario (DateTimeField con auto_now_add=True): Este campo almacena la fecha y hora en que se creó el comentario. auto_now_add=True significa que se establecerá automáticamente en la fecha y hora actual cuando se crea el comentario, y no cambiará después.
+
+________________________________________
+
+FORMS.PY
+En este archivo podemos encontrar los formularios usados para cargar los datos que quedan guardados en la base de datos. Son 4 los formularios: 1- registrar usuarios, 2- buscar usuarios, 3- crear noticias, 4- buscar noticias. 
+________________________________________
+
+URLS.PY
+Contiene cada una de las rutas de las vistas de la app.
+________________________________________
+
+VIEWS.PY
+Aparecen todas las vistas que se utilizan en la app. Asociado a lo anterior por cada modelo se aplica el concepto de CRUD(Create, Read, Update, Delete); una vista de logueo, registro y edicion de perfil del usuario. 
+________________________________________
+
+TEMPLATES.
+Es una carpeta donde se encuentran todos los archivos HTML, usados por la app. Se utiliza una platilla de BOOSTRAP y se aplica el concepto de herencia a cada archivo.
+________________________________________
+
+Autora: Victoria Gomez Anaya

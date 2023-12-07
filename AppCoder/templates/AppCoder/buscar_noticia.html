@@ -1,0 +1,26 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido_titulo %}
+<h1>Buscar Noticia</h1>
+{% endblock contenido_titulo %}
+
+{% block contenido %}
+
+<!-- Formulario de búsqueda -->
+<form method="post" action="{% url 'AppCoder:foros' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" name="buscar_noticia">Buscar Noticia</button>
+</form>
+
+<!-- Mostrar resultados de la búsqueda -->
+{% if noticias %}
+    <h2>Resultados de la Búsqueda</h2>
+    <ul>
+        {% for noticia in noticias %}
+            <li>{{ noticia.titulo }} - {{ noticia.contenido }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock contenido %}

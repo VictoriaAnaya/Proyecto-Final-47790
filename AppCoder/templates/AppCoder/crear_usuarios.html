@@ -1,3 +1,4 @@
+
 {% extends 'AppCoder/base.html' %}
 
 {% block contenido_titulo %}
@@ -6,10 +7,11 @@
 
 {% block contenido %}
 
-<form method="post">
+<!-- Formulario de registro -->
+<form method="post" action="{% url 'AppCoder:crear_usuarios' %}">
   {% csrf_token %}
-  {{form.as_p}}
-  <button type= "submitt">Registrar</button>
+  {{ form_registro.as_p }}
+  <button type="submit" name="registrar_usuario">Registrar Usuario</button>
 </form>
 
 

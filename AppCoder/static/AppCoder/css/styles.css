@@ -10836,3 +10836,13 @@ a {
 a:hover {
   text-decoration: underline; /* Subrayado al pasar el ratón sobre el enlace */
 }
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body .container {
+  flex-grow: 1;
+}

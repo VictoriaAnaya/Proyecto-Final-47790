@@ -12,25 +12,20 @@
     <div class="col-lg-5">
         <h1 class="font-weight-light">Quick Finance</h1>
         <p>Descubre el mundo de las finanzas en Quick Finance, tu foro de noticias económicas. Únete a la conversación, comparte opiniones y mantente informado sobre los últimos acontecimientos financieros globales. ¡Conviértete en parte de nuestra comunidad hoy!</p>
-        <a class="btn btn-primary" href="AppCoder/crear_usuarios">Suscribíte ahora!</a>
+        <a class="btn btn-primary" href="{% url 'AppCoder:crear_usuarios' %}">Suscribíte ahora!</a>
     </div>
     </div>
     <!-- Call to Action-->
     <div class="card text-white bg-secondary my-5 py-4 text-center">
     <div class="card-body"><p class="text-white m-0">Descubrí, Participá y Crecé: Hacé clic para unirte a la Comunidad Financiera. ¡Empezá tu viaje ahora!</p></div>
     </div>
-    <!-- Content Row-->
-    <div class="row gx-4 gx-lg-5">
-
-        <div class="row">
-            {% for item in contenido %}
-                <div class="col-md-4 mb-5">
-                    {% include 'AppCoder/card.html' with titulo=item.titulo descripcion=item.descripcion url=item.url %}
-                </div>
-            {% endfor %}
-        </div>
-   </div>
-
+    
+ <!-- Content Row-->
+<div class="row gx-4 gx-lg-5">
+    {% include 'AppCoder/card.html' with titulo="Autores" descripcion="Conocé las últimas publicaciones y noticias de tus autores favoritos" url="usuarios" %}
+    {% include 'AppCoder/card.html' with titulo="Noticias" descripcion="Mantente al día con las últimas noticias y eventos que están marcando tendencia" url="noticias" %}
+    {% include 'AppCoder/card.html' with titulo="Inversiones" descripcion="Descubrí oportunidades de inversión y consejos financieros para tu crecimiento." url="foros" %}
+</div>
 
 {% endblock contenido %}
 
