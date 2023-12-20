@@ -19,6 +19,8 @@
     <p>Nombre: {{ usuario_encontrado.nombre }}</p>
     <p>Apellido: {{ usuario_encontrado.apellido }}</p>
   
+    <li><a href="{% url 'AppCoder:eliminar_usuario' id=usuarios.id %}" class="button-link">Eliminar Usuario</a></li>
+
 {% endif %}
 
 {% endblock contenido %}

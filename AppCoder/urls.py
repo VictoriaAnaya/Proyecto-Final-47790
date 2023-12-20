@@ -1,7 +1,7 @@
 
 
 from django.urls import path
-from .views import inicio_view, usuarios_view, foros_view, noticias_view, about_view, crear_noticia, buscar_noticia_view, crear_usuario_view, buscar_usuario_view
+from .views import inicio_view, usuarios_view, foros_view, noticias_view, about_view, crear_noticia, buscar_noticia_view, crear_usuario_view, buscar_usuario_view, delete_user
 
 app_name = 'AppCoder'
 
@@ -15,4 +15,5 @@ urlpatterns = [
     path('buscar-noticia/', buscar_noticia_view, name='buscar_noticia'),
     path("usuarios/crear/", crear_usuario_view, name="crear_usuarios"),
     path("usuarios/buscar/", buscar_usuario_view, name="buscar_usuarios"),
+    path('usuarios/eliminar/<int:id>/', delete_user, name='eliminar_usuario'),
 ]

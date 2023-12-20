@@ -10,6 +10,7 @@
     <li><a href="{% url 'AppCoder:inicio' %}">Volver al inicio</a></li>
     <li><a href="{% url 'AppCoder:crear_usuarios' %}" class="button-link">Crear un nuevo Usuario</a></li>
     <li><a href="{% url 'AppCoder:buscar_usuarios' %}" class="button-link">Buscar Usuario</a></li>
+    
 </ul>
 
 {% for usuario in usuarios %}
@@ -33,6 +34,7 @@
     {% else %}
         <p>No está registrado su país de origen</p>
     {% endif %}
+<li><a href="{% url 'AppCoder:eliminar_usuario' id=usuario.id %}" class="button-link">Eliminar Usuario</a></li>
 {% endfor %}
 
 {% endblock contenido %}

@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from . import models
 from datetime import date
 from . import forms
+from django.contrib.auth.decorators import login_required
+from . models import Usuario
 
 def inicio_view(request):
     return render(request, 'AppCoder/index.html')
@@ -9,7 +11,7 @@ def inicio_view(request):
 def usuarios_view(request, accion=None):
     usuarios = models.Usuario.objects.all()
     context = {'usuarios': usuarios}
-    return render(request, 'AppCoder/usuarios.html', context)
+    return render(request, 'AppCoder/usuarios.html', context) 
     
 def crear_usuario_view(request):
     form_registro = forms.Usuario_Form()
@@ -46,6 +48,16 @@ def buscar_usuario_view(request):
     }
     return render(request, 'AppCoder/buscar_usuarios.html', context)
 
+
+def delete_user(request, id):
+    user_to_delete = get_object_or_404(Usuario, id=id)
+
+    if request.method == 'POST':
+        user_to_delete.delete()
+        return redirect('AppCoder/inicio')  
+
+    return render(request, 'eliminar_usuario.html', {'user_to_delete': user_to_delete})
+
 def about_view(request):
     return render(request, 'AppCoder/about.html')
 
@@ -74,7 +86,7 @@ def buscar_noticia_view(request):
             informacion = formulario.cleaned_data
             noticias_filtradas = models.Noticia.objects.filter(titulo__icontains=informacion["titulo"])
             contexto = {"noticias": noticias_filtradas}
-            return render(request, "App/noticias.html", contexto)
+            return render(request, "AppCoder/noticias.html", contexto)
 
     
 def crear_noticia(request):
@@ -83,7 +95,7 @@ def crear_noticia(request):
         form = forms.Noticia_Form(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("AppCoder:crear_noticia")
+            return redirect("AppCoder:noticias")
     else:
         form = forms.Noticia_Form()
     return render(request, "AppCoder/crear_noticia.html", {"form": forms.Noticia_Form()})

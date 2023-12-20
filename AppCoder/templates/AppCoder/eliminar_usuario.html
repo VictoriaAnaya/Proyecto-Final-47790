@@ -1,0 +1,16 @@
+
+
+<html>
+<head>
+    <title>Eliminar Usuario</title>
+</head>
+<body>
+    <h2>Eliminar Usuario</h2>
+    <p>¿Estás seguro de que deseas eliminar al usuario {{ user_to_delete.username }}?</p>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <input type="submit" value="Eliminar">
+    </form>
+</body>
+</html>
