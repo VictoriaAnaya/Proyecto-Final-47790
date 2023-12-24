@@ -1,0 +1,13 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido_titulo %}
+    <h1>Editar Usuario</h1>
+{% endblock contenido_titulo %}
+
+{% block contenido %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Guardar cambios">
+    </form>
+{% endblock contenido %}

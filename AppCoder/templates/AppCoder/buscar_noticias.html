@@ -1,0 +1,28 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido_titulo %}
+    <h1>Buscar Noticias</h1>
+{% endblock contenido_titulo %}
+
+{% block contenido %}
+    <form method="post" action="{% url 'AppCoder:buscar_noticia' %}">
+        {% csrf_token %}
+        {{ form_busqueda.as_p }}
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    {% if noticias_encontradas %}
+        <ul>
+            {% for noticia in noticias_encontradas %}
+                <li>
+                    <strong>Título:</strong> {{ noticia.titulo }}<br>
+                    <strong>Contenido:</strong> {{ noticia.contenido }}<br>
+                    <a href="{% url 'AppCoder:editar_noticia' id_noticia=noticia.id_noticia %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'AppCoder:eliminar_noticia' id_noticia=noticia.id_noticia %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta noticia?')">Eliminar</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron noticias de ese autor.</p>
+    {% endif %}
+{% endblock contenido %}

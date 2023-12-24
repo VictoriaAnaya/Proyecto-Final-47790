@@ -1,0 +1,10 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido_titulo %}
+    <h1>Detalle de Usuario</h1>
+{% endblock contenido_titulo %}
+
+{% block contenido %}
+    <h2>{{ usuario.nombre }}</h2>
+    <p>Apellido: {{ usuario.apellido }}</p>
+{% endblock contenido %}

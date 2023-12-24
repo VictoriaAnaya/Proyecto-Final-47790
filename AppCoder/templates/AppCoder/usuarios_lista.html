@@ -1,0 +1,40 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido_titulo %}
+    <h1>Lista de Usuarios</h1>
+{% endblock contenido_titulo %}
+
+{% block contenido %}
+    <ul>
+        <li><a href="{% url 'AppCoder:inicio' %}">Volver al inicio</a></li>
+        {% for usuario in usuarios %}
+            <li>
+                <strong>Nombre:</strong> {{ usuario.nombre }}<br>
+                <strong>Apellido:</strong> {{ usuario.apellido }}<br>
+                <!-- Resto de la información del usuario -->
+
+                <a href="{% url 'AppCoder:editar_usuario' pk=usuario.pk %}">Editar</a>
+                <a href="{% url 'AppCoder:eliminar_usuario' pk=usuario.pk %}">Eliminar</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Usuarios Registrados</h2>
+
+    {% if usuarios %}
+        <ul>
+            {% for usuario in usuarios %}
+                <li>
+                    <strong>Nombre:</strong> {{ usuario.nombre }}<br>
+                    <strong>Apellido:</strong> {{ usuario.apellido }}<br>
+                    <!-- Resto de la información del usuario -->
+
+                    <a href="{% url 'AppCoder:editar_usuario' pk=usuario.pk %}">Editar</a>
+                    <a href="{% url 'AppCoder:eliminar_usuario' pk=usuario.pk %}">Eliminar</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay usuarios registrados.</p>
+    {% endif %}
+{% endblock contenido %}

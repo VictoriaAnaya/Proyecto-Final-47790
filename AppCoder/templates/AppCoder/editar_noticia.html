@@ -1,0 +1,13 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido_titulo %}
+    <h1>Editar Noticia</h1>
+{% endblock contenido_titulo %}
+
+{% block contenido %}
+    <form method="post" action="{% url 'AppCoder:editar_noticia' id_noticia=noticia.id_noticia %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+{% endblock contenido %}

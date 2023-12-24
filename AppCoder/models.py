@@ -5,7 +5,7 @@ class Pais(models.Model):
 
     def __str__(self):
         return self.nombre
-
+    
 class ID_Usuario(models.Model):
     nombre = models.CharField(max_length=100, unique=True)
 
@@ -13,12 +13,12 @@ class ID_Usuario(models.Model):
         return self.nombre
 
 class Usuario(models.Model):
-    ID = models.ForeignKey(ID_Usuario, on_delete=models.SET_NULL, null=True, blank=True)
+    ID = models.BigAutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     nacimiento = models.DateField(null=True, blank=True)
     intereses = models.CharField(max_length=100)
-    pais_origen = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, blank=True)
+    pais_origen = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
@@ -30,9 +30,10 @@ class Categoria(models.Model):
         return self.nombre
 
 class Noticia(models.Model):
+    numero = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=255)
     contenido = models.TextField()
-    autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    autor = models.CharField(max_length=100)
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     categorias = models.ManyToManyField(Categoria)
 

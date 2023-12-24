@@ -1,18 +1,18 @@
 {% extends 'AppCoder/base.html' %}
 
-
 {% block contenido_titulo %}
-<h1>About</h1>
+    
 {% endblock contenido_titulo %}
 
 {% block contenido %}
-<h1>Hola, esto es About</h1>
+    {% load static %}
 
-<body>
-    
-    <li><a href="{% url 'AppCoder:inicio' %}">Volver al inicio</a></li>
-</body>
-</html>
+    <div style="max-width: 800px; margin: auto; text-align: justify;">
+        <h2 style="color: #007BFF;">¿Quién es la creadora de Quick Finance?</h2>
+        <p><strong>Fecha de edición: 23/12/2023 </strong> {{ fecha_actual }}</p>
+        <img src="{% static 'AppCoder/Image/FotoPropia.png' %}" alt="Imagen de la creadora" style="max-width: 400px; height: auto; display: block; margin: auto; margin-bottom: 20px;">
+        <h3 style="color: #007BFF;">Acerca del proyecto:</h3>
+        <p style="margin-bottom: 15px;">Quick Finance es un proyecto que surgió a partir de la cursada de Python en la academia digital CoderHouse. El mismo consiste en un blog financiero, donde múltiples usuarios pueden participar de foros de conversación, publicar noticias e interactuar entre sí por medio de mensajería instantánea.</p>
+        <p style="margin-bottom: 15px;">La creadora de este proyecto es Victoria Gómez Anaya, Licenciada en Administración de la Universidad Nacional de Mar del Plata. Una joven de 25 años, dedicada al análisis financiero para la toma de decisiones, que ha implementado la programación como un aliado de las finanzas modernas.</p>
+    </div>
 {% endblock contenido %}
-
-

@@ -1,0 +1,21 @@
+div {
+    max-width: 800px;
+    margin: auto;
+    text-align: justify;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    color: #007BFF;
+}
+
+p {
+    margin-bottom: 15px;
+}

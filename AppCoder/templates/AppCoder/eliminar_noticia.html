@@ -1,0 +1,14 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido_titulo %}
+    <h1>Eliminar Noticia</h1>
+{% endblock contenido_titulo %}
+
+{% block contenido %}
+    <h2>¿Estás seguro que deseas eliminar la noticia "{{ noticia.titulo }}"?</h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        <input type="submit" value="Sí, eliminar noticia">
+    </form>
+    <a href="{% url 'AppCoder:buscar_noticias' %}">Cancelar</a>
+{% endblock contenido %}

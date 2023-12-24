@@ -1,40 +1,30 @@
 {% extends 'AppCoder/base.html' %}
 
 {% block contenido_titulo %}
-<H1>USUARIOS</H1>
+    <h1>Usuarios</h1>
 {% endblock contenido_titulo %}
 
 {% block contenido %}
+    <ul>
+        <li><a href="{% url 'AppCoder:inicio' %}">Volver al inicio</a></li>
+        <li><a href="{% url 'AppCoder:crear_usuarios' %}" class="button-link">Crear un nuevo Usuario</a></li>
+        <li><a href="{% url 'AppCoder:buscar_usuarios' %}" class="button-link">Buscar Usuario</a></li>
+        <li><a href="{% url 'AppCoder:usuarios_lista' %}" class="button-link">Usuarios Registrados</a></li>
+    </ul>
 
-<ul>
-    <li><a href="{% url 'AppCoder:inicio' %}">Volver al inicio</a></li>
-    <li><a href="{% url 'AppCoder:crear_usuarios' %}" class="button-link">Crear un nuevo Usuario</a></li>
-    <li><a href="{% url 'AppCoder:buscar_usuarios' %}" class="button-link">Buscar Usuario</a></li>
-    
-</ul>
+    <div id="usuarios-container" style="display: none;">
+        <!-- Contenido de usuarios se cargará aquí -->
+    </div>
 
-{% for usuario in usuarios %}
-    <h5>{{usuario.nombre}}</h5>  
-    <h5>{{usuario.apellido}}</h5>
-    
-    {% if usuario.nacimiento %}
-       <p>{{usuario.nacimiento}}</p>
-    {% else %}
-       <p>No está registrada su fecha de nacimiento</p>
-    {% endif %}  
-    
-    {% if usuario.intereses %}
-       <p>{{usuario.intereses}}</p>
-    {% else %}
-       <p>No están registrados sus intereses</p>
-    {% endif %}
-
-    {% if usuario.pais_origen %}
-        <p>{{usuario.pais_origen}}</p>
-    {% else %}
-        <p>No está registrado su país de origen</p>
-    {% endif %}
-<li><a href="{% url 'AppCoder:eliminar_usuario' id=usuario.id %}" class="button-link">Eliminar Usuario</a></li>
-{% endfor %}
-
+    <script>
+        document.getElementById('mostrar-usuarios').addEventListener('click', function() {
+            // Lógica para cargar la lista de usuarios
+            fetch('{% url "AppCoder:usuarios_lista" %}')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('usuarios-container').innerHTML = data;
+                    document.getElementById('usuarios-container').style.display = 'block';
+                });
+        });
+    </script>
 {% endblock contenido %}

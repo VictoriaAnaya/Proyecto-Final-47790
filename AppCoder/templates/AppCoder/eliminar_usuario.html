@@ -1,16 +1,15 @@
+{% extends 'AppCoder/base.html' %}
 
+{% block contenido_titulo %}
+    <h1>Eliminar Usuario</h1>
+{% endblock contenido_titulo %}
 
-<html>
-<head>
-    <title>Eliminar Usuario</title>
-</head>
-<body>
-    <h2>Eliminar Usuario</h2>
-    <p>¿Estás seguro de que deseas eliminar al usuario {{ user_to_delete.username }}?</p>
-
+{% block contenido %}
+    <h2>¿Estás seguro que deseas eliminar a {{ usuario.nombre }}?</h2>
     <form method="post" action="">
         {% csrf_token %}
-        <input type="submit" value="Eliminar">
+        <input type="submit" value="Sí, eliminar usuario">
     </form>
-</body>
-</html>
+    <a href="{% url 'AppCoder:buscar_usuarios' %}">Cancelar</a>
+{% endblock contenido %}
+

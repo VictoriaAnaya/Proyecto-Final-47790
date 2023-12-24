@@ -7,7 +7,6 @@
 
 {% block contenido %}
 
-<!-- Formulario de registro -->
 <form method="post" action="{% url 'AppCoder:crear_usuarios' %}">
   {% csrf_token %}
   {{ form_registro.as_p }}

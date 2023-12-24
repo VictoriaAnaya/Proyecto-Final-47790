@@ -1,0 +1,63 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido_titulo %}
+   
+{% endblock contenido_titulo %}
+
+{% block contenido %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrate</title>
+    
+    <style>
+        .error-list {
+            color: red;
+        }
+
+        /* Estilos adicionales para el botón de logout */
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #007bff; /* Color azul, puedes ajustar según tus preferencias */
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(227, 224, 225);">
+    <h2>Registrate</h2>
+    <p>Completá el formulario para registrarte en Quick Finance.</p>
+    <form action="/AppCoder/registro" method="POST">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <p>
+                {{ field.label_tag }}
+                {{ field }}
+                
+                {% if field.errors %}
+                    <ul class="error-list">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </p>
+        {% endfor %}
+        
+        <input type="submit" value="Iniciar sesión">
+    </form>
+
+    <form action="{% url 'AppCoder:logout' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="submit">Logout</button>
+</body>
+</html>
+{% endblock %}
+
