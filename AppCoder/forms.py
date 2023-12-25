@@ -47,7 +47,7 @@ class UsuarioBuscarFormulario(forms.Form):
     
 
 
-#### CLASE 23: registro
+#----------------------------------------- registro -------------------------------------------------------------
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, UserModel
 
@@ -72,3 +72,10 @@ class UserEditionFormulario(UserChangeForm):
         model = UserModel
         fields = ["email", "first_name", "last_name"]
         help_texts = {k: "" for k in fields}
+
+
+class UserAvatarFormulario(forms.ModelForm):
+
+    class Meta:
+        model = models.Avatar
+        fields = ["imagen"]

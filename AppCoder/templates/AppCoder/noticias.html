@@ -1,17 +1,37 @@
 {% extends 'AppCoder/base.html' %}
 
-{% block contenido_titulo %}
-<h1>NOTICIAS</h1>
-{% endblock contenido_titulo %}
-
 {% block contenido %}
-<ul>
-    <li><a href="{% url 'AppCoder:inicio' %}">Volver al inicio</a></li>
-    <li><a href="{% url 'AppCoder:crear_noticia' %}" class="button-link">Crear una nueva noticia</a></li>
-    <li><a href="{% url 'AppCoder:buscar_noticia' %}" class="button-link">Buscar noticia</a></li>
-</ul>
+    <div class="my-4">
+        <h1 class="display-4 font-weight-bold">Noticias de Última Hora</h1>
+        <p class="lead">Explora las últimas noticias y mantente informado sobre los eventos más recientes en el mundo.</p>
 
+        <ul class="list-unstyled">
+            {% if not detalle_noticia %}
+                <li><a href="{% url 'AppCoder:inicio' %}">Volver al inicio</a></li>
+                <li><a href="{% url 'AppCoder:crear_noticia' %}" class="button-link">Crear una nueva noticia</a></li>
+                <li><a href="{% url 'AppCoder:buscar_noticia' %}" class="button-link">Buscar noticia</a></li>
+            {% endif %}
+        </ul>
+
+        <!-- Sección de Noticias -->
+        <h2 class="h4">Noticias Recientes</h2>
+
+        {% for noticia in noticias %}
+            <div class="card my-3">
+                <div class="card-header">
+                    <!-- Aquí puedes incluir el avatar del usuario que creó la noticia -->
+                    <img src="{{ noticia.autor.avatar.url }}" alt="Avatar de {{ noticia.autor }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover; margin-right: 10px;"> 
+                    <span class="font-weight-bold">{{ noticia.autor.username }}</span>
+                </div>
+                <img src="{{ noticia.imagen.url }}" class="card-img-top" alt="Imagen de la Noticia" style="max-height: 200px;">
+                <div class="card-body">
+                    <h3 class="card-title h5">{{ noticia.titulo }}</h3>
+                    <p class="card-text">{{ noticia.descripcion }}</p>
+                    {% if not detalle_noticia %}
+                        <a href="{{ noticia.get_absolute_url }}" class="btn btn-primary">Leer más</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock contenido %}
-
-
-

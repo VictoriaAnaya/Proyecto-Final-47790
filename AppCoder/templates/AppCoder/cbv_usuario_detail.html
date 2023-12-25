@@ -1,0 +1,13 @@
+{% extends "AppCoder/base.html" %}
+
+
+{% block contenido%}
+<h4>Detalle de Usuarios Registrados</h4>
+
+{{ nombre }}
+<h1> Detalle del Usuario </h1>
+
+{{usuario.nombre}} - email: {{ usuario.email}} ?
+
+<a href="{% url 'AppCoder:detalle_usuario' %}">Regresar</a>
+{% endblock %}

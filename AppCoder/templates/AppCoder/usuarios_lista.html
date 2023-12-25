@@ -1,40 +1,23 @@
-{% extends 'AppCoder/base.html' %}
+{% extends "AppCoder/base.html" %}
 
-{% block contenido_titulo %}
-    <h1>Lista de Usuarios</h1>
-{% endblock contenido_titulo %}
+{% block contenido%}
+<div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4; max-width: 600px; margin: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <h4 style="color: #4a90e2; border-bottom: 2px solid #4a90e2; padding-bottom: 10px;">Lista de Usuarios</h4>
 
-{% block contenido %}
-    <ul>
-        <li><a href="{% url 'AppCoder:inicio' %}">Volver al inicio</a></li>
-        {% for usuario in usuarios %}
-            <li>
-                <strong>Nombre:</strong> {{ usuario.nombre }}<br>
-                <strong>Apellido:</strong> {{ usuario.apellido }}<br>
-                <!-- Resto de la información del usuario -->
-
-                <a href="{% url 'AppCoder:editar_usuario' pk=usuario.pk %}">Editar</a>
-                <a href="{% url 'AppCoder:eliminar_usuario' pk=usuario.pk %}">Eliminar</a>
-            </li>
-        {% endfor %}
-    </ul>
-
-    <h2>Usuarios Registrados</h2>
-
-    {% if usuarios %}
-        <ul>
+    <div style="margin-top: 20px;">
+        {% if usuarios %}
             {% for usuario in usuarios %}
-                <li>
-                    <strong>Nombre:</strong> {{ usuario.nombre }}<br>
-                    <strong>Apellido:</strong> {{ usuario.apellido }}<br>
-                    <!-- Resto de la información del usuario -->
-
-                    <a href="{% url 'AppCoder:editar_usuario' pk=usuario.pk %}">Editar</a>
-                    <a href="{% url 'AppCoder:eliminar_usuario' pk=usuario.pk %}">Eliminar</a>
-                </li>
+                <h6 style="color: #333; background-color: #eaf2ff; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+                    {{ usuario.nombre }} {{ usuario.apellido }} ({{ usuario.email }})- {{ usuario.profesion }}
+                </h6>
+                <a href="{% url 'AppCoder:eliminar_usuario' pk=usuario.pk %}" style="font-size: 0.8em; color: #4a90e2; margin-right: 10px; text-decoration: none;">Eliminar</a>
+                <a href="{% url 'AppCoder:editar_usuario' pk=usuario.pk %}" style="font-size: 0.8em; color: #4a90e2; margin-right: 10px; text-decoration: none;">Editar</a>
             {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay usuarios registrados.</p>
-    {% endif %}
-{% endblock contenido %}
+        {% else %}
+            <p>No hay usuarios registrados.</p>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'AppCoder:crear_usuarios' %}" style="font-size: 0.9em; color: #4a90e2; text-decoration: none;">Crear usuario</a>
+</div>
+{% endblock %}

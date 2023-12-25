@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,40 +11,45 @@
     <link rel="stylesheet" href="{% static 'AppCoder/css/styles.css' %}">
     <title>Quick Finance</title>
 </head>
+
 <body>
 
     {% include 'AppCoder/navbar.html' %}
 
-    <!-- Page Content-->
+    <!-- Page Content -->
     <div class="container px-4 px-lg-5">
 
-        <h1>
+        <h1 class="my-4">
             {% block contenido_titulo %}
            
             {% endblock contenido_titulo %}
         </h1>
 
-        {% block contenido %}{% endblock contenido %}
-
-        {% block contenido_adicional %}
-            {% if user.is_authenticated %}
-                <form action="{% url 'AppCoder:logout' %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="submit">Logout</button>
-                </form>
-            {% else %}
-
-            {% endif %}
-        {% endblock contenido_adicional %}
+        <div class="my-4">
+            {% block contenido %}
+           
+            {% endblock contenido %}
+        </div>
 
     </div>
 
-    {% include 'AppCoder/footer.html' %}
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <div class="social-icons">
+                <a href="#" target="_blank" class="icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" class="icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" class="icon"><i class="fab fa-facebook"></i></a>
+            </div>
+            <p class="m-0 text-center text-white">© 2023 Quick Finance. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
-    <!-- Bootstrap core JS-->
+    <!-- Bootstrap core JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
+    <!-- Core theme JS -->
     <script src="{% static 'AppCoder/js/scripts.js' %}"></script>
 
 </body>
+
 </html>

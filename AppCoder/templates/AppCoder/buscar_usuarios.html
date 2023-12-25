@@ -5,20 +5,32 @@
 {% endblock contenido_titulo %}
 
 {% block contenido %}
-    <form method="get" action="{% url 'AppCoder:buscar_usuarios' %}">
-        <label for="nombre">Consulta de Usuario:</label>
-        <input type="text" name="nombre" id="nombre">
+    <form method="post" action="{% url 'AppCoder:buscar_usuarios' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit">Buscar</button>
     </form>
 
-    {% if usuarios %}
-        <p>Resultados de la búsqueda para "{{ nombre }}":</p>
-        <ul>
-            {% for usuario in usuarios %}
-                <li>{{ usuario.nombre }} {{ usuario.apellido }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No se encontraron usuarios con ese nombre.</p>
+    {% if usuarios_encontrados is not None %}
+        {% if usuarios_encontrados %}
+            <div class="resultados-busqueda">
+                <p>Resultados de la búsqueda:</p>
+                <ul>
+                    {% for usuario in usuarios_encontrados %}
+                        <li>
+                            <strong>{{ usuario.nombre }} {{ usuario.apellido }}</strong>
+                            <ul>
+                                <li>Email: {{ usuario.email }}</li>
+                                <li>Intereses: {{ usuario.intereses }}</li>
+                                <li>Fecha de Nacimiento: {{ usuario.nacimiento }}</li>
+                                <li>País: {{ usuario.pais_origen }}</li>
+                            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p>No se encontraron resultados.</p>
+        {% endif %}
     {% endif %}
 {% endblock contenido %}

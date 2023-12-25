@@ -2,32 +2,41 @@
 {% load static %}
 
 {% block contenido_titulo %}
-<h1>INICIO</h1>
+    
 {% endblock contenido_titulo %}
 
 {% block contenido %}
-    <!-- Heading Row-->
+    <!-- Heading Row -->
     <div class="row gx-4 gx-lg-5 align-items-center my-5">
-    <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="static/AppCoder/Image/ImagenPrincipal.png" alt="..." /></div>
-    <div class="col-lg-5">
-        <h1 class="font-weight-light">Quick Finance</h1>
-        <p>Descubre el mundo de las finanzas en Quick Finance, tu foro de noticias económicas. Únete a la conversación, comparte opiniones y mantente informado sobre los últimos acontecimientos financieros globales. ¡Conviértete en parte de nuestra comunidad hoy!</p>
-        <a class="btn btn-primary" href="{% url 'AppCoder:crear_usuarios' %}">Suscribíte ahora!</a>
+        <div class="col-lg-7">
+            <img class="img-fluid rounded mb-4 mb-lg-0" src="{% static 'AppCoder/Image/ImagenPrincipal.png' %}" alt="..." />
+        </div>
+        <div class="col-lg-5">
+            <h1 class="display-4 font-weight-bold">Quick Finance</h1>
+            <p class="lead">Descubre el mundo de las finanzas en Quick Finance, tu foro de noticias económicas. Únete a la conversación, comparte opiniones y mantente informado sobre los últimos acontecimientos financieros globales. ¡Conviértete en parte de nuestra comunidad hoy!</p>
+            <a class="btn btn-primary btn-lg" href="{% url 'AppCoder:crear_usuarios' %}">Suscríbete ahora!</a>
+        </div>
     </div>
-    </div>
-    <!-- Call to Action-->
+    <!-- Call to Action -->
     <div class="card text-white bg-secondary my-5 py-4 text-center">
-    <div class="card-body"><p class="text-white m-0">Descubrí, Participá y Crecé: Hacé clic para unirte a la Comunidad Financiera. ¡Empezá tu viaje ahora!</p></div>
+        <div class="card-body">
+            <p class="lead">Descubre, Participa y Crece: Haz clic para unirte a la Comunidad Financiera. ¡Empieza tu viaje ahora!</p>
+            <!-- Agrega los íconos de redes sociales aquí -->
+            <div class="social-icons">
+                <a href="#" target="_blank" class="icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" class="icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" class="icon"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
     </div>
-    
+
     {{ mensaje }}
-    
- <!-- Content Row-->
-<div class="row gx-4 gx-lg-5">
-    {% include 'AppCoder/card.html' with titulo="Autores" descripcion="Conocé las últimas publicaciones y noticias de tus autores favoritos" url="usuarios" %}
-    {% include 'AppCoder/card.html' with titulo="Noticias" descripcion="Mantente al día con las últimas noticias y eventos que están marcando tendencia" url="noticias" %}
-    {% include 'AppCoder/card.html' with titulo="Inversiones" descripcion="Descubrí oportunidades de inversión y consejos financieros para tu crecimiento." url="foros" %}
-</div>
+
+    <!-- Content Row -->
+    <div class="row gx-4 gx-lg-5">
+        {% include 'AppCoder/card.html' with titulo="Autores" descripcion="Conoce las últimas publicaciones y noticias de tus autores favoritos" url="usuarios" %}
+        {% include 'AppCoder/card.html' with titulo="Noticias" descripcion="Mantente al día con las últimas noticias y eventos que están marcando tendencia" url="noticias" %}
+        {% include 'AppCoder/card.html' with titulo="Inversiones" descripcion="Descubre oportunidades de inversión y consejos financieros para tu crecimiento." url="foros" %}
+    </div>
 
 {% endblock contenido %}
-

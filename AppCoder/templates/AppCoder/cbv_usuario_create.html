@@ -1,0 +1,49 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block contenido %}
+<style>
+    .form-container {
+        background-color: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        width: 50%;
+        margin: 50px auto;
+        text-align: center;
+    }
+
+    .form-container h2 {
+        margin-bottom: 20px;
+        color: rgb(66, 198, 238);
+    }
+
+    .form-field {
+        margin-bottom: 15px;
+    }
+
+    input[type="submit"] {
+        background-color: rgb(0, 113, 128);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+    }
+</style>
+
+<div class="form-container">
+    <h2>Registrar Usuario</h2>
+    <form action="{% url 'AppCoder:crear_usuarios' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-field">
+            {{ form.as_p }}
+        </div>
+        <input type="submit" value="Crear">
+    </form>
+</div>
+{% endblock %}

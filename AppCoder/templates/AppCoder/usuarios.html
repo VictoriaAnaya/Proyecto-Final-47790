@@ -1,20 +1,32 @@
 {% extends 'AppCoder/base.html' %}
 
 {% block contenido_titulo %}
-    <h1>Usuarios</h1>
+    <h1 class="display-4 font-weight-bold">Autores</h1>
+    <p class="lead">Explora la lista de autores registrados y descubre las personas detrás de las noticias y publicaciones en Quick Finance.</p>
 {% endblock contenido_titulo %}
 
 {% block contenido %}
-    <ul>
-        <li><a href="{% url 'AppCoder:inicio' %}">Volver al inicio</a></li>
-        <li><a href="{% url 'AppCoder:crear_usuarios' %}" class="button-link">Crear un nuevo Usuario</a></li>
-        <li><a href="{% url 'AppCoder:buscar_usuarios' %}" class="button-link">Buscar Usuario</a></li>
-        <li><a href="{% url 'AppCoder:usuarios_lista' %}" class="button-link">Usuarios Registrados</a></li>
+    <ul class="list-unstyled">
+        <li><a href="{% url 'AppCoder:inicio'%}" class="custom-link">Volver al inicio</a></li>
+        <li><a href="{% url 'AppCoder:crear_usuarios' %}" class="custom-link">Registrarse</a></li>
+        <li><a href="{% url 'AppCoder:buscar_usuarios' %}" class="custom-link">Buscar Autor</a></li>
+        <li><a href="{% url 'AppCoder:usuarios_lista' %}" class="custom-link">Autores Registrados</a></li>
     </ul>
 
     <div id="usuarios-container" style="display: none;">
         <!-- Contenido de usuarios se cargará aquí -->
     </div>
+
+    <style>
+        .custom-link {
+            background-color: white;
+            color: blue;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
 
     <script>
         document.getElementById('mostrar-usuarios').addEventListener('click', function() {
