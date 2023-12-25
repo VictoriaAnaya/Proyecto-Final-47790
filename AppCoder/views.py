@@ -4,13 +4,20 @@ from datetime import date
 from . import forms
 from . models import Usuario
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from .forms import UserEditionFormulario 
 from .models import Avatar
 
 def inicio_view(request):
-    return render(request, 'AppCoder/index.html')
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
+    return render(request, 'AppCoder/index.html', context = {"avatar_url": avatar_url})
 
 def crear_usuario_view(request):
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
     form_registro = forms.Usuario_Form()
 
     if request.method == 'POST' and 'registrar_usuario' in request.POST:
@@ -22,9 +29,12 @@ def crear_usuario_view(request):
     context = {
         'form_registro': form_registro,
     }
-    return render(request, 'AppCoder/crear_usuarios.html', context)
+    return render(request, 'AppCoder/crear_usuarios.html',  context = {"avatar_url": avatar_url})
 
 def buscar_usuario_view(request):
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
     usuarios_encontrados = None
     if request.method == 'POST':
         form = forms.UsuarioBuscarFormulario(request.POST)
@@ -36,25 +46,37 @@ def buscar_usuario_view(request):
         'form': forms.UsuarioBuscarFormulario(),
         'usuarios_encontrados': usuarios_encontrados,
     }
-    return render(request, 'AppCoder/buscar_usuarios.html', context)
+    return render(request, 'AppCoder/buscar_usuarios.html', context = {"avatar_url": avatar_url})
 
 
 def detalle_usuario_view(request, ID):
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
     usuario = get_object_or_404(Usuario, id=ID)
     context = {'usuario': usuario}
-    return render(request, 'AppCoder/detalle_usuario.html', context)
+    return render(request, 'AppCoder/detalle_usuario.html', context = {"avatar_url": avatar_url})
 
 def about_view(request):
-    return render(request, 'AppCoder/about.html')
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
+    return render(request, 'AppCoder/about.html', context = {"avatar_url": avatar_url})
 
 def foros_view(request):
-    return render(request, 'AppCoder/foros.html')
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
+    return render(request, 'AppCoder/foros.html', context = {"avatar_url": avatar_url})
 
 def noticias_view(request):
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
     noticias = models.Noticia.objects.all()
     categorias = models.Categoria.objects.all()
     context = {"noticias": noticias, "categorias": categorias}
-    return render(request, 'AppCoder/noticias.html', context)
+    return render(request, 'AppCoder/noticias.html', context )
 
 def detalle_noticia(request, noticia_id):
     noticia = get_object_or_404(models.Noticia, pk=noticia_id)
@@ -100,10 +122,13 @@ def eliminar_noticia_view(request, id_noticia):
         noticia.delete()
         return redirect('AppCoder:buscar_noticia')
 
-    return render(request, 'AppCoder/eliminar_noticia.html', {'noticia': noticia})
+    return render(request, 'AppCoder/eliminar_noticia.html', {'noticia': noticia}, )
 
 
 def editar_noticia_view(request, id_noticia):
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
     noticia = get_object_or_404(models.Noticia, id_noticia=id_noticia)
     form = forms.NoticiaEditarFormulario(instance=noticia)
 
@@ -119,6 +144,9 @@ def editar_noticia_view(request, id_noticia):
 
 @login_required
 def usuarios_view(request):
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
     if request.method == "GET":
         return render(
             request,
@@ -145,12 +173,18 @@ def usuarios_view(request):
 
 @login_required
 def obtener_usuarios(request):
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
     usuarios = Usuario.objects.all()
-    return render(request, 'AppCoder/usuarios_lista.html', {'usuarios': usuarios})
+    return render(request, 'AppCoder/usuarios_lista.html', {'usuarios': usuarios}, context = {"avatar_url": avatar_url})
 
 
 @login_required
 def eliminar_usuario_view(request, ID):
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
     usuario = get_object_or_404(Usuario, id=ID)
 
     if request.method == 'POST':
@@ -158,11 +192,14 @@ def eliminar_usuario_view(request, ID):
         return redirect('AppCoder:buscar_usuarios')
 
     context = {'usuario': usuario}
-    return render(request, 'AppCoder/eliminar_usuario.html', context)
+    return render(request, 'AppCoder/eliminar_usuario.html', context = {"avatar_url": avatar_url})
 
 
 @login_required
 def editar_usuario_view(request, id):
+    usuario = request.user
+    avatar = models.Avatar.objects.filter(user=usuario).first()
+    avatar_url = avatar.imagen.url if avatar is not None else ""
     usuario = Usuario.objects.filter(Usuario, ID=id).first()
     if request.method == "GET":
         formulario = forms.Usuario_Form(
@@ -174,7 +211,7 @@ def editar_usuario_view(request, id):
                 "fecha de nacimiento": usuario.nacimiento,
                 "pais de origen": usuario.pais_origen,
             })
-        return render(request, 'AppCoder/editar_usuario.html', {'forms': forms, 'usuario': usuario})
+        return render(request, 'AppCoder/editar_usuario.html', {'forms': forms, 'usuario': usuario}, context = {"avatar_url": avatar_url})
     else:
         formulario = forms.Usuario_Form(request.POST)
         if formulario.is_valid():
@@ -277,7 +314,11 @@ def login_view(request):
             )
 
 def logout_view(request):
-    pass
+    if 'avatar_url' in request.session:
+       del request.session['avatar_url']
+    logout(request)
+    return render(request, 'AppCoder/logout.html')
+    
 
 from .forms import UserCreationFormulario, UserEditionFormulario
 from django.contrib.auth.views import PasswordChangeView
@@ -361,6 +402,6 @@ def crear_avatar_view(request):
         formulario = forms.UserAvatarFormulario(request.POST, request.FILES)
         if formulario.is_valid():
             informacion = formulario.cleaned_data
-            modelo = models.Avatar(user=usuario, imagen=informacion["imagen"])
+            modelo = models.Avatar(user=request.user, imagen=informacion["imagen"])
             modelo.save()
             return redirect("AppCoder:inicio")

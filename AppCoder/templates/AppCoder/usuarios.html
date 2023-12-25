@@ -6,37 +6,34 @@
 {% endblock contenido_titulo %}
 
 {% block contenido %}
-    <ul class="list-unstyled">
-        <li><a href="{% url 'AppCoder:inicio'%}" class="custom-link">Volver al inicio</a></li>
-        <li><a href="{% url 'AppCoder:crear_usuarios' %}" class="custom-link">Registrarse</a></li>
-        <li><a href="{% url 'AppCoder:buscar_usuarios' %}" class="custom-link">Buscar Autor</a></li>
-        <li><a href="{% url 'AppCoder:usuarios_lista' %}" class="custom-link">Autores Registrados</a></li>
-    </ul>
+    {% load static %}
 
-    <div id="usuarios-container" style="display: none;">
-        <!-- Contenido de usuarios se cargará aquí -->
+    <link rel="stylesheet" href="{% static 'AppCoder/css/estilos.css' %}">
+
+    <div class="container mt-5">
+        <h2 class="text-primary">¡Bienvenido a Quick Finance!</h2>
+        <li><a href="{% url 'AppCoder:inicio' %}" class="custom-link">Volver al inicio</a></li>
+        
+        <img src="{% static 'AppCoder/Image/FotoGenerica.jpg' %}" alt="Imagen Genérica" class="img-fluid mx-auto d-block rounded mb-4" style="max-width: 300px;">
+
+        <p class="mb-4">
+            Quick Finance es un proyecto financiero donde puedes participar en foros, leer noticias, y conectarte con otros entusiastas de las finanzas.
+        </p>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <a href="{% url 'AppCoder:crear_usuarios' %}" class="btn btn-primary btn-block custom-btn">Registrarse</a>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <a href="{% url 'AppCoder:buscar_usuarios' %}" class="btn btn-primary btn-block custom-btn">Buscar Autor</a>
+                </div>
+            </div>
+
+            <h2 class="mt-4">Explora a nuestros Autores Destacados y sus principales intereses:</h2>
+            <button type="button" class="btn btn-primary custom-btn">
+                <a href="{% url 'AppCoder:usuarios_lista' %}" class="text-white">Autores Registrados</a>
+            </button>
+        </div>
     </div>
-
-    <style>
-        .custom-link {
-            background-color: white;
-            color: blue;
-            padding: 5px 10px;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-        }
-    </style>
-
-    <script>
-        document.getElementById('mostrar-usuarios').addEventListener('click', function() {
-            // Lógica para cargar la lista de usuarios
-            fetch('{% url "AppCoder:usuarios_lista" %}')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('usuarios-container').innerHTML = data;
-                    document.getElementById('usuarios-container').style.display = 'block';
-                });
-        });
-    </script>
 {% endblock contenido %}
