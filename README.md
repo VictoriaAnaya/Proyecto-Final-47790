@@ -1,4 +1,4 @@
-# Proyecto Final´Python 47790 - Gónez Anaya Victoria 
+# Proyecto Final Python 47790 - Gómez Anaya Victoria 
 Entrega del proyecto final del curso de CoderHouse, comisión 47790, realizada por la alumna Gómez Anaya Victoria.
 
 ________________________________________
